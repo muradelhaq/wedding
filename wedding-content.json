@@ -1,0 +1,48 @@
+{
+  "general": {
+    "title": "Tasyakuran Pernikahan Ramazan & Dede",
+    "theme": "champagne-emerald",
+    "target_group": "Keluarga Ağrı-Indo"
+  },
+  "couple": {
+    "groom": {
+      "name": "Ramazan Akcaalan",
+      "nickname": "Ramazan",
+      "father": "Ismail Akcaalan",
+      "mother": "Aysel Akcaalan",
+      "origin": "Ağrı, Turki",
+      "instagram": "ramazanakcaalan"
+    },
+    "bride": {
+      "name": "Dede Sobariah",
+      "nickname": "Dede",
+      "father": "Endeng Zenal Arifin",
+      "mother": "Ipah Saripah",
+      "origin": "Garut, Indonesia",
+      "instagram": "dedesobariah"
+    }
+  },
+  "event": {
+    "title": "Tasyakuran Pernikahan",
+    "day": "Ahad",
+    "date": "2026-09-20",
+    "time_start": "11:00",
+    "time_end": "15:00",
+    "timezone": "WIB",
+    "datetime_iso": "2026-09-20T11:00:00+07:00",
+    "venue": "Rumah Makan dan Wisata Eptilu",
+    "city": "Garut",
+    "maps_url": "https://bit.ly/4qGZHen"
+  },
+  "quotes": {
+    "bismillah": "بسم اللّه الرّحمن الرّحيم",
+    "salam": "ٱلسَّلَامُ عَلَيْكُمْ وَرَحْمَةُ ٱللَّٰهِ وَبَرَكَاتُهُ",
+    "verse_surah": "QS. Ar-Rum: 21",
+    "verse_text": "Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan berpasang-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang...",
+    "closing_prayer": "Jazakumullahu khairan Katsiran"
+  },
+  "families": {
+    "groom_family": "Keluarga Bpk. Ismail Akcaalan & Ibu Aysel Akcaalan",
+    "bride_family": "Keluarga Bpk. Endeng Zenal Arifin & Ibu Ipah Saripah"
+  }
+}

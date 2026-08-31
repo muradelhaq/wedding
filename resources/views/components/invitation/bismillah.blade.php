@@ -1,0 +1,31 @@
+@props(['settings'])
+
+<section class="py-16 sm:py-20 px-6 max-w-3xl mx-auto text-center">
+    <!-- Arabic Bismillah & Salam -->
+    <div class="mb-8" data-reveal="fade-down">
+        <h2 class="font-arabic text-3xl sm:text-4xl text-[#314736] leading-relaxed mb-3 drop-shadow-sm" data-reveal="zoom-in" data-reveal-delay="100">
+            {{ $settings['quotes']['bismillah_text'] ?? 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ' }}
+        </h2>
+        <p class="font-arabic text-xl sm:text-2xl text-[#57795c] leading-relaxed" data-reveal="fade-up" data-reveal-delay="200">
+            {{ $settings['quotes']['salam_text'] ?? 'السَّلاَمُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ' }}
+        </p>
+    </div>
+
+    <!-- Quranic Verse in Luxury Sage-White Card -->
+    <div class="relative bg-gradient-to-b from-white to-[#F4F7F4] border-2 border-[#D5E2D7] rounded-3xl p-6 sm:p-10 shadow-[0_10px_30px_rgba(111,149,117,0.12)]" data-reveal="zoom-in" data-reveal-delay="300">
+        <div class="w-16 h-1 bg-gradient-to-r from-transparent via-[#6F9575] to-transparent mx-auto mb-6 rounded-full"></div>
+        
+        <blockquote class="italic font-serif text-base sm:text-lg text-[#233327] leading-relaxed mb-4">
+            "{{ $settings['quotes']['quote_text'] ?? 'Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan berpasang-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang...' }}"
+        </blockquote>
+        
+        <p class="text-xs sm:text-sm font-semibold tracking-widest text-[#57795c] uppercase font-serif">
+            {{ $settings['quotes']['quote_source'] ?? 'QS. Ar-Rum: 21' }}
+        </p>
+    </div>
+
+    <!-- Invitation Message -->
+    <p class="mt-8 text-sm sm:text-base text-[#425E47] leading-relaxed max-w-xl mx-auto font-sans" data-reveal="fade-up" data-reveal-delay="400">
+        Dengan memohon Rahmat & Ridho Allah Subhanahu Wata'ala, kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk menghadiri dan memberikan do'a restu pada acara Tasyakuran Pernikahan kami:
+    </p>
+</section>
