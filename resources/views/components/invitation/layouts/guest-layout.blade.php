@@ -11,8 +11,11 @@
     <meta property="og:type" content="website">
     <meta property="og:title" content="{{ $settings['general']['invitation_title'] ?? 'Tasyakuran Pernikahan Ramazan & Dede' }}">
     <meta property="og:description" content="Dengan memohon Rahmat & Ridho Allah SWT, kami mengundang Bapak/Ibu/Saudara/i untuk hadir di acara Tasyakuran Pernikahan kami.">
-    <meta property="og:image" content="{{ asset('images/cartoon_couple_cover.jpg') }}">
+    <meta property="og:image" content="{{ asset('images/cartoon_couple_cover.webp') }}">
     <meta property="og:url" content="{{ url()->current() }}">
+
+    <!-- High Priority Preload for Instant Cover Rendering -->
+    <link rel="preload" as="image" href="{{ asset('images/cartoon_couple_cover.webp') }}">
 
     <!-- Google Fonts: Great Vibes, Alex Brush, Playfair Display, Cinzel, Amiri, Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -85,8 +88,8 @@
     <!-- Main Content Slot -->
     {{ $slot }}
 
-    <!-- Global Persistent Falling Leaves & Petals Canvas (Persistent overlay across all sections on scroll) -->
-    <canvas id="global-falling-leaves-canvas" class="fixed inset-0 w-full h-full pointer-events-none z-30"></canvas>
+    <!-- Global Persistent Falling Leaves & Petals Canvas (Persistent overlay across all sections, cover, and on scroll) -->
+    <canvas id="global-falling-leaves-canvas" class="fixed inset-0 w-full h-full pointer-events-none z-[60]"></canvas>
 
     <!-- Global Floating Toast Notification -->
     <div x-data="{

@@ -31,7 +31,7 @@ class SettingSeeder extends Seeder
             ['key' => 'groom_father', 'value' => 'Bpk. Ismail Akcaalan', 'group' => 'couple', 'type' => 'text'],
             ['key' => 'groom_mother', 'value' => 'Ibu Aysel Akcaalan', 'group' => 'couple', 'type' => 'text'],
             ['key' => 'groom_origin', 'value' => 'Ağrı, Turki', 'group' => 'couple', 'type' => 'text'],
-            ['key' => 'groom_photo', 'value' => '/images/cartoon_groom.jpg', 'group' => 'couple', 'type' => 'image'],
+            ['key' => 'groom_photo', 'value' => '/images/cartoon_groom.webp', 'group' => 'couple', 'type' => 'image'],
             ['key' => 'groom_instagram', 'value' => 'ramazanakcaalan', 'group' => 'couple', 'type' => 'text'],
 
             // Bride
@@ -40,7 +40,7 @@ class SettingSeeder extends Seeder
             ['key' => 'bride_father', 'value' => 'Bpk. Endeng Zenal Arifin', 'group' => 'couple', 'type' => 'text'],
             ['key' => 'bride_mother', 'value' => 'Ibu Ipah Saripah', 'group' => 'couple', 'type' => 'text'],
             ['key' => 'bride_origin', 'value' => 'Garut, Indonesia', 'group' => 'couple', 'type' => 'text'],
-            ['key' => 'bride_photo', 'value' => '/images/cartoon_bride.jpg', 'group' => 'couple', 'type' => 'image'],
+            ['key' => 'bride_photo', 'value' => '/images/cartoon_bride.webp', 'group' => 'couple', 'type' => 'image'],
             ['key' => 'bride_instagram', 'value' => 'dedesobariah', 'group' => 'couple', 'type' => 'text'],
 
             // Event 1: Tasyakuran Pernikahan (Main Event)
@@ -59,14 +59,14 @@ class SettingSeeder extends Seeder
             Setting::updateOrCreate(['key' => $setting['key']], $setting);
         }
 
-        // Default Galleries with Cartoon Artwork
+        // Default Galleries with Cartoon Artwork (Optimized WebP)
         Gallery::truncate();
         $photos = [
-            ['/images/cartoon_couple_cover.jpg', 'The Wedding of Ramazan & Dede', true],
-            ['/images/cartoon_moment_1.jpg', 'Momen Bahagia 1', false],
-            ['/images/cartoon_moment_2.jpg', 'Momen Bahagia 2', false],
-            ['/images/cartoon_groom.jpg', 'Mempelai Pria - Ramazan', false],
-            ['/images/cartoon_bride.jpg', 'Mempelai Wanita - Dede', false],
+            ['/images/cartoon_couple_cover.webp', 'The Wedding of Ramazan & Dede', true],
+            ['/images/cartoon_moment_1.webp', 'Momen Bahagia 1', false],
+            ['/images/cartoon_moment_2.webp', 'Momen Bahagia 2', false],
+            ['/images/cartoon_groom.webp', 'Mempelai Pria - Ramazan', false],
+            ['/images/cartoon_bride.webp', 'Mempelai Wanita - Dede', false],
         ];
 
         foreach ($photos as $i => [$url, $title, $featured]) {

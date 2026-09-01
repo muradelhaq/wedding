@@ -13,7 +13,7 @@
         <!-- 1. Background Cartoon Couple Cover Layer -->
         <div class="bg-palace absolute inset-0 z-1 bg-cover bg-center pointer-events-none transition-transform duration-1000"
              :class="isCurtainOpening ? 'scale-105' : ''"
-             style="background-image: url('{{ asset('images/cartoon_couple_cover.jpg') }}');">
+             style="background-image: url('{{ asset('images/cartoon_couple_cover.webp') }}');">
             <!-- Dark Vignette for High Text Readability -->
             <div class="absolute inset-0 bg-gradient-to-b from-[#162119]/60 via-[#162119]/25 to-[#162119]/80"></div>
             <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(22,33,25,0.45)_0%,rgba(22,33,25,0.1)_55%,rgba(22,33,25,0.65)_100%)]"></div>

@@ -16,7 +16,7 @@
                 <div class="absolute inset-0 rounded-full border-2 border-dashed border-[#6F9575]/60 animate-spin-slow"></div>
                 <div class="absolute inset-2 rounded-full bg-gradient-to-tr from-[#6F9575] via-[#B6CDB9] to-[#314736] p-1 shadow-lg">
                     <img 
-                        src="{{ $settings['couple']['groom_photo'] ?? asset('images/cartoon_groom.jpg') }}" 
+                        src="{{ $settings['couple']['groom_photo'] ?? asset('images/cartoon_groom.webp') }}" 
                         alt="{{ $settings['couple']['groom_name'] ?? 'Ramazan Akcaalan' }}" 
                         class="w-full h-full object-cover rounded-full shadow-inner"
                         loading="lazy">
@@ -59,7 +59,7 @@
                 <div class="absolute inset-0 rounded-full border-2 border-dashed border-[#6F9575]/60 animate-spin-slow"></div>
                 <div class="absolute inset-2 rounded-full bg-gradient-to-tr from-[#314736] via-[#B6CDB9] to-[#6F9575] p-1 shadow-lg">
                     <img 
-                        src="{{ $settings['couple']['bride_photo'] ?? asset('images/cartoon_bride.jpg') }}" 
+                        src="{{ $settings['couple']['bride_photo'] ?? asset('images/cartoon_bride.webp') }}" 
                         alt="{{ $settings['couple']['bride_name'] ?? 'Dede Sobariah' }}" 
                         class="w-full h-full object-cover rounded-full shadow-inner"
                         loading="lazy">

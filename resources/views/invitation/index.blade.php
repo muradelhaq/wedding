@@ -91,7 +91,7 @@
 
             <!-- Hero Section: Fullscreen 100vh Identical in Size, Perspective & High Contrast -->
             <section class="relative w-full h-[100dvh] min-h-[100dvh] max-w-[430px] mx-auto flex flex-col justify-between items-center text-center p-6 sm:p-8 overflow-hidden bg-cover bg-center shadow-2xl bg-[#162119]"
-                     style="background-image: url('{{ asset('images/cartoon_couple_cover.jpg') }}');">
+                     style="background-image: url('{{ asset('images/cartoon_couple_cover.webp') }}');">
                 
                 <!-- Ambient Dark Vignette for High Text Contrast with Sage Tint -->
                 <div class="absolute inset-0 bg-gradient-to-b from-[#162119]/60 via-[#162119]/25 to-[#162119]/80 pointer-events-none"></div>
