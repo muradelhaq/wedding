@@ -1,4 +1,4 @@
-@props(['musicUrl' => 'https://assets.mixkit.co/music/preview/mixkit-romantic-wedding-641.mp3'])
+@props(['musicUrl' => asset('audio/wedding-nasheed.mp3')])
 
 <div 
     x-show="isOpened"

@@ -15,8 +15,8 @@ class SettingSeeder extends Seeder
             // General
             ['key' => 'invitation_title', 'value' => 'The Wedding of Ramazan & Dede', 'group' => 'general', 'type' => 'text'],
             ['key' => 'app_theme', 'value' => 'sage-white', 'group' => 'general', 'type' => 'text'],
-            ['key' => 'music_url', 'value' => 'https://assets.mixkit.co/music/preview/mixkit-romantic-wedding-641.mp3', 'group' => 'general', 'type' => 'text'],
-            ['key' => 'music_title', 'value' => 'Romantic Wedding Melody', 'group' => 'general', 'type' => 'text'],
+            ['key' => 'music_url', 'value' => '/audio/wedding-nasheed.mp3', 'group' => 'general', 'type' => 'text'],
+            ['key' => 'music_title', 'value' => 'Wedding Nasheed - Muhammad Al Muqit', 'group' => 'general', 'type' => 'text'],
 
             // Quotes
             ['key' => 'bismillah_text', 'value' => 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ', 'group' => 'quotes', 'type' => 'text'],

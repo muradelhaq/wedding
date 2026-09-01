@@ -140,7 +140,7 @@
         </main>
 
         <!-- Floating Music Player Button -->
-        <x-invitation.music-player :musicUrl="$settings['general']['music_url'] ?? 'https://assets.mixkit.co/music/preview/mixkit-romantic-wedding-641.mp3'" />
+        <x-invitation.music-player :musicUrl="$settings['general']['music_url'] ?? asset('audio/wedding-nasheed.mp3')" />
 
         <!-- Image Lightbox Modal -->
         <div x-show="lightboxActive"
