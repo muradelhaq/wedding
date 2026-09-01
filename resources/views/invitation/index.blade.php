@@ -89,7 +89,7 @@
               x-transition:enter-end="opacity-100"
               class="relative z-10">
 
-            <!-- Hero Section: Fullscreen 100vh Identical in Size, Perspective & High Contrast -->
+            <!-- Hero Section: Fullscreen 100vh Identical in Typography, Arch, Sizing & Perspective to Cover -->
             <section class="relative w-full h-[100dvh] min-h-[100dvh] max-w-[430px] mx-auto flex flex-col justify-between items-center text-center p-6 sm:p-8 overflow-hidden bg-cover bg-center shadow-2xl bg-[#162119]"
                      style="background-image: url('{{ asset('images/cartoon_couple_cover.webp') }}');">
                 
@@ -99,26 +99,32 @@
                 <div class="sunlight-overlay absolute inset-0 pointer-events-none"
                      style="background: radial-gradient(circle at 50% 25%, rgba(244, 247, 244, 0.2) 0%, rgba(111, 149, 117, 0.15) 60%, rgba(22,33,25,0.3) 100%);"></div>
 
+                <!-- 4. Lengkungan Bunga & Pilar (Floral Arch Frame) Identik dengan Cover -->
+                <div class="arch-frame absolute inset-x-[5%] top-[5%] bottom-0 border-2 border-[#6F9575]/50 border-b-0 rounded-t-[180px] z-4 pointer-events-none shadow-[inset_0_0_20px_rgba(255,255,255,0.3)]"></div>
+
                 <!-- Top Subtitle -->
                 <div class="relative z-10 pt-6">
-                    <p class="font-display text-[0.85rem] sm:text-[0.95rem] tracking-[6px] uppercase text-[#F4F7F4] font-bold text-sage-shadow">
+                    <p class="sub-title font-display text-[0.85rem] sm:text-[0.95rem] tracking-[6px] uppercase text-[#F4F7F4] font-bold mb-2 text-sage-shadow">
                         The Wedding of
                     </p>
                 </div>
 
-                <!-- Center Couple Names & Date (Vivid High Contrast Gradient) -->
+                <!-- Center Couple Names & Date (Identik Persis dengan Cover Sebelum Dibuka) -->
                 <div class="relative z-10 my-auto text-center w-full px-2">
-                    <h1 class="font-script text-6xl sm:text-7xl md:text-8xl font-bold leading-[1.15] text-gold-gradient py-1">
-                        {{ $settings['couple']['groom_nickname'] ?? 'Ramazan' }}
-                    </h1>
-                    <span class="font-display text-2xl sm:text-3xl text-[#F4F7F4] my-[-4px] block font-light italic text-sage-shadow">
-                        &
-                    </span>
-                    <h1 class="font-script text-6xl sm:text-7xl md:text-8xl font-bold leading-[1.15] text-gold-gradient py-1">
-                        {{ $settings['couple']['bride_nickname'] ?? 'Dede' }}
-                    </h1>
+                    <div class="names-wrapper my-2">
+                        <h1 class="name font-script text-6xl sm:text-7xl md:text-8xl font-bold leading-[1.15] text-gold-gradient py-1">
+                            {{ $settings['couple']['groom_nickname'] ?? 'Ramazan' }}
+                        </h1>
+                        <span class="ampersand font-display text-2xl sm:text-3xl text-[#F4F7F4] my-[-4px] block font-light italic text-sage-shadow">
+                            &
+                        </span>
+                        <h1 class="name font-script text-6xl sm:text-7xl md:text-8xl font-bold leading-[1.15] text-gold-gradient py-1">
+                            {{ $settings['couple']['bride_nickname'] ?? 'Dede' }}
+                        </h1>
+                    </div>
 
-                    <div class="inline-block font-display text-xs sm:text-[0.85rem] tracking-[3px] py-1.5 px-5 rounded-full bg-[#162119]/70 backdrop-blur-md border border-[#6F9575]/80 text-[#F4F7F4] font-bold mt-4 uppercase shadow-lg text-sage-shadow">
+                    <!-- Date Badge (Identik dengan Cover) -->
+                    <div class="date-badge inline-block font-display text-xs sm:text-[0.85rem] tracking-[3px] py-1.5 px-5 rounded-full bg-[#162119]/70 backdrop-blur-md border border-[#6F9575]/80 text-[#F4F7F4] font-bold mt-3 uppercase shadow-lg text-sage-shadow">
                         {{ $settings['event']['event_day'] ?? 'AHAD' }}, {{ strtoupper($settings['event']['event_date_formatted'] ?? '20 SEPTEMBER 2026') }}
                     </div>
                 </div>
