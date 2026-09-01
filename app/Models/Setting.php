@@ -17,6 +17,17 @@ class Setting extends Model
         'type',
     ];
 
+    protected static function booted(): void
+    {
+        static::saved(function () {
+            static::clearCache();
+        });
+
+        static::deleted(function () {
+            static::clearCache();
+        });
+    }
+
     public static function get(string $key, mixed $default = null): mixed
     {
         $all = Cache::rememberForever('app_wedding_settings', function () {

@@ -1,5 +1,22 @@
 @props(['musicUrl' => asset('audio/wedding-nasheed.mp3')])
 
+@php
+    $resolvedMusicUrl = \Illuminate\Support\Str::startsWith($musicUrl, ['http://', 'https://']) 
+        ? $musicUrl 
+        : asset(ltrim($musicUrl, '/'));
+@endphp
+
+<!-- Always in DOM for Instant Autoplay Support Across Mobile & Desktop Browsers -->
+<audio 
+    id="wedding-audio"
+    x-ref="audioPlayer" 
+    src="{{ $resolvedMusicUrl }}" 
+    loop 
+    preload="auto"
+    class="hidden">
+</audio>
+
+<!-- Floating Audio Toggle Button (Revealed after opening invitation) -->
 <div 
     x-show="isOpened"
     x-transition:enter="transition ease-out duration-500 delay-300 transform"
@@ -7,15 +24,6 @@
     x-transition:enter-end="opacity-100 scale-100"
     class="fixed bottom-6 right-6 z-40">
 
-    <!-- Hidden Audio Element -->
-    <audio 
-        x-ref="audioPlayer" 
-        src="{{ $musicUrl }}" 
-        loop 
-        preload="auto">
-    </audio>
-
-    <!-- Floating Audio Toggle Button -->
     <button 
         @click="toggleAudio()" 
         type="button"

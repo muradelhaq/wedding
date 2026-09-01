@@ -5,19 +5,39 @@
             isPlaying: false,
             lightboxActive: false,
             lightboxImg: '',
-            lightboxTitle: '',
+            init() {
+                const audio = document.getElementById('wedding-audio') || document.querySelector('audio');
+                if (audio) {
+                    audio.addEventListener('play', () => { this.isPlaying = true; });
+                    audio.addEventListener('pause', () => { this.isPlaying = false; });
+                    audio.addEventListener('ended', () => { this.isPlaying = false; });
+                }
+            },
             openInvitation() {
                 if (this.isCurtainOpening) return;
                 this.isCurtainOpening = true;
 
-                // 1. Play Background Music
-                const audio = this.$refs.musicPlayer?.$refs?.audioPlayer || document.querySelector('audio');
+                // 1. Play Background Music immediately upon user gesture click
+                const audio = document.getElementById('wedding-audio') || document.querySelector('audio');
                 if (audio) {
-                    audio.play().then(() => {
-                        this.isPlaying = true;
-                    }).catch(e => {
-                        console.log('Audio autoplay prevented:', e);
-                    });
+                    audio.muted = false;
+                    const playPromise = audio.play();
+                    if (playPromise !== undefined) {
+                        playPromise.then(() => {
+                            this.isPlaying = true;
+                        }).catch(e => {
+                            console.warn('Playback error or waiting interaction:', e);
+                            const resumeOnInteraction = () => {
+                                audio.play().then(() => {
+                                    this.isPlaying = true;
+                                }).catch(() => {});
+                                document.removeEventListener('click', resumeOnInteraction);
+                                document.removeEventListener('touchstart', resumeOnInteraction);
+                            };
+                            document.addEventListener('click', resumeOnInteraction, { once: true });
+                            document.addEventListener('touchstart', resumeOnInteraction, { once: true });
+                        });
+                    }
                 }
 
                 // 2. Theatrical Curtain Opening duration (1.2s), then reveal main content
@@ -34,14 +54,17 @@
                 }, 1200);
             },
             toggleAudio() {
-                const audio = document.querySelector('audio');
+                const audio = document.getElementById('wedding-audio') || document.querySelector('audio');
                 if (!audio) return;
                 if (this.isPlaying) {
                     audio.pause();
                     this.isPlaying = false;
                 } else {
-                    audio.play();
-                    this.isPlaying = true;
+                    audio.play().then(() => {
+                        this.isPlaying = true;
+                    }).catch(e => {
+                        console.warn('Audio play error:', e);
+                    });
                 }
             },
             openLightbox(url, title = '') {
