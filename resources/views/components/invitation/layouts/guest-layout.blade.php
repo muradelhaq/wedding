@@ -85,6 +85,9 @@
     <!-- Main Content Slot -->
     {{ $slot }}
 
+    <!-- Global Persistent Falling Leaves & Petals Canvas (Persistent overlay across all sections on scroll) -->
+    <canvas id="global-falling-leaves-canvas" class="fixed inset-0 w-full h-full pointer-events-none z-30"></canvas>
+
     <!-- Global Floating Toast Notification -->
     <div x-data="{
             show: false,
@@ -120,5 +123,155 @@
         <span x-text="message"></span>
     </div>
 
+    <!-- Global Falling Leaves & Petals Animation Script -->
+    <script>
+        (function() {
+            function initFallingPetals() {
+                const canvas = document.getElementById('global-falling-leaves-canvas');
+                if (!canvas) return;
+                const ctx = canvas.getContext('2d');
+                if (!ctx) return;
+
+                let width = (canvas.width = window.innerWidth);
+                let height = (canvas.height = window.innerHeight);
+
+                function onResize() {
+                    width = canvas.width = window.innerWidth;
+                    height = canvas.height = window.innerHeight;
+                }
+                window.addEventListener('resize', onResize, { passive: true });
+
+                // Particles: Sage green leaves, white rose petals, and delicate soft sparkles
+                const particleCount = 38;
+                const particles = [];
+
+                for (let i = 0; i < particleCount; i++) {
+                    const typeRand = Math.random();
+                    let type = 'petal';
+                    let size = Math.random() * 6 + 4;
+                    let speedY = Math.random() * 0.9 + 0.5;
+                    let swaySpeed = Math.random() * 0.02 + 0.01;
+                    let rotSpeed = (Math.random() - 0.5) * 1.8;
+                    let alpha = Math.random() * 0.5 + 0.35;
+                    let color = 'rgba(255, 255, 255,';
+
+                    if (typeRand < 0.45) {
+                        // Sage Green Leaf
+                        type = 'leaf';
+                        size = Math.random() * 7 + 5;
+                        color = Math.random() > 0.5 ? 'rgba(111, 149, 117,' : 'rgba(145, 179, 149,';
+                    } else if (typeRand < 0.85) {
+                        // White Rose Petal
+                        type = 'petal';
+                        size = Math.random() * 7 + 4;
+                        color = 'rgba(255, 255, 255,';
+                    } else {
+                        // Soft Golden Shimmer
+                        type = 'sparkle';
+                        size = Math.random() * 2.5 + 1.5;
+                        speedY = Math.random() * 0.5 + 0.3;
+                        color = 'rgba(213, 226, 215,';
+                        alpha = Math.random() * 0.7 + 0.3;
+                    }
+
+                    particles.push({
+                        x: Math.random() * width,
+                        y: Math.random() * height,
+                        type,
+                        size,
+                        speedY,
+                        swaySpeed,
+                        swayAngle: Math.random() * Math.PI * 2,
+                        rotation: Math.random() * 360,
+                        rotSpeed,
+                        color,
+                        alpha,
+                        wind: (Math.random() - 0.5) * 0.3
+                    });
+                }
+
+                function drawLeaf(ctx, p) {
+                    ctx.save();
+                    ctx.translate(p.x, p.y);
+                    ctx.rotate((p.rotation * Math.PI) / 180);
+                    ctx.beginPath();
+                    ctx.moveTo(0, -p.size);
+                    ctx.quadraticCurveTo(p.size * 0.6, 0, 0, p.size);
+                    ctx.quadraticCurveTo(-p.size * 0.6, 0, 0, -p.size);
+                    ctx.fillStyle = `${p.color} ${p.alpha})`;
+                    ctx.fill();
+                    ctx.beginPath();
+                    ctx.moveTo(0, -p.size * 0.8);
+                    ctx.lineTo(0, p.size * 0.8);
+                    ctx.strokeStyle = `rgba(35, 51, 39, ${p.alpha * 0.35})`;
+                    ctx.lineWidth = 0.6;
+                    ctx.stroke();
+                    ctx.restore();
+                }
+
+                function drawPetal(ctx, p) {
+                    ctx.save();
+                    ctx.translate(p.x, p.y);
+                    ctx.rotate((p.rotation * Math.PI) / 180);
+                    ctx.beginPath();
+                    ctx.ellipse(0, 0, p.size * 1.3, p.size * 0.8, 0, 0, Math.PI * 2);
+                    ctx.fillStyle = `${p.color} ${p.alpha})`;
+                    ctx.shadowColor = 'rgba(255, 255, 255, 0.4)';
+                    ctx.shadowBlur = 4;
+                    ctx.fill();
+                    ctx.restore();
+                }
+
+                function drawSparkle(ctx, p) {
+                    ctx.save();
+                    ctx.translate(p.x, p.y);
+                    ctx.beginPath();
+                    ctx.arc(0, 0, p.size, 0, Math.PI * 2);
+                    ctx.fillStyle = `${p.color} ${p.alpha})`;
+                    ctx.shadowColor = 'rgba(182, 205, 185, 0.8)';
+                    ctx.shadowBlur = 6;
+                    ctx.fill();
+                    ctx.restore();
+                }
+
+                function render() {
+                    ctx.clearRect(0, 0, width, height);
+
+                    for (let i = 0; i < particles.length; i++) {
+                        const p = particles[i];
+                        p.y += p.speedY;
+                        p.swayAngle += p.swaySpeed;
+                        p.x += Math.sin(p.swayAngle) * 0.8 + p.wind;
+                        p.rotation += p.rotSpeed;
+
+                        if (p.y > height + 20) {
+                            p.y = -20;
+                            p.x = Math.random() * width;
+                        }
+                        if (p.x > width + 20) p.x = -20;
+                        if (p.x < -20) p.x = width + 20;
+
+                        if (p.type === 'leaf') {
+                            drawLeaf(ctx, p);
+                        } else if (p.type === 'petal') {
+                            drawPetal(ctx, p);
+                        } else {
+                            drawSparkle(ctx, p);
+                        }
+                    }
+
+                    requestAnimationFrame(render);
+                }
+
+                requestAnimationFrame(render);
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initFallingPetals);
+            } else {
+                initFallingPetals();
+            }
+        })();
+    </script>
 </body>
 </html>

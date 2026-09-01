@@ -40,10 +40,7 @@
              :class="isCurtainOpening ? 'opacity-0 scale-105' : 'opacity-100'">
         </div>
 
-        <!-- 5. Canvas Partikel & Kelopak Bunga Berjatuhan -->
-        <canvas id="particle-canvas" class="absolute inset-0 w-full h-full z-5 pointer-events-none"></canvas>
-
-        <!-- 6. Merpati Terbang (Doves) -->
+        <!-- 5. Merpati Terbang (Doves) -->
         <div class="dove-container absolute top-[6%] left-1/2 -translate-x-1/2 z-6 flex gap-8 pointer-events-none transition-all duration-700"
              :class="isCurtainOpening ? 'opacity-0 -translate-y-10' : 'opacity-100'"
              style="animation: doveFly 5s ease-in-out infinite alternate;">
@@ -51,7 +48,7 @@
             <span class="dove text-2xl filter drop-shadow-[0_4px_8px_rgba(0,0,0,0.8)] transform scale-x-[-1]">🕊️</span>
         </div>
 
-        <!-- 7. Lampu / Lantern di Kiri & Kanan Bawah -->
+        <!-- 6. Lampu / Lantern di Kiri & Kanan Bawah -->
         <div class="lantern lantern-left absolute bottom-[55px] left-4 w-11 h-20 z-7 flex flex-col items-center pointer-events-none transition-all duration-700"
              :class="isCurtainOpening ? 'opacity-0 -translate-x-10' : 'opacity-100'"
              style="animation: floatLantern 4s ease-in-out infinite alternate;">
@@ -68,7 +65,7 @@
             <div class="lantern-stand w-[3px] h-11 bg-gradient-to-b from-[#6F9575] to-[#233327]"></div>
         </div>
 
-        <!-- 8. KONTEN TEKS & TIPOGRAFI UTAMA (High Contrast & Crystal Clear) -->
+        <!-- 7. KONTEN TEKS & TIPOGRAFI UTAMA (High Contrast & Crystal Clear) -->
         <div class="content relative inset-0 z-10 flex flex-col items-center justify-center text-center p-5 w-full my-auto text-[#F4F7F4]">
             
             <!-- Sub-Title -->
@@ -123,68 +120,3 @@
 
     </div>
 </section>
-
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const canvas = document.getElementById('particle-canvas');
-        if (!canvas) return;
-        const ctx = canvas.getContext('2d');
-
-        let width, height;
-        function resize() {
-            if (!canvas.offsetWidth || !canvas.offsetHeight) return;
-            width = canvas.width = canvas.offsetWidth;
-            height = canvas.height = canvas.offsetHeight;
-        }
-        window.addEventListener('resize', resize);
-        resize();
-
-        // Partikel kelopak bunga putih & daun sage hijau lembut
-        const particles = [];
-        const particleCount = 28;
-
-        for (let i = 0; i < particleCount; i++) {
-            particles.push({
-                x: Math.random() * (width || 400),
-                y: Math.random() * (height || 800),
-                radius: Math.random() * 3.5 + 1.5,
-                speedY: Math.random() * 0.8 + 0.4,
-                speedX: Math.random() * 0.6 - 0.3,
-                rotation: Math.random() * 360,
-                rotationSpeed: (Math.random() - 0.5) * 1.5,
-                color: Math.random() > 0.4 ? 'rgba(111, 149, 117,' : 'rgba(255, 255, 255,',
-                alpha: Math.random() * 0.6 + 0.3
-            });
-        }
-
-        function animateParticles() {
-            if (!width || !height) {
-                resize();
-            }
-            ctx.clearRect(0, 0, width, height);
-
-            particles.forEach(p => {
-                p.y += p.speedY;
-                p.x += Math.sin(p.y * 0.015) * 0.5 + p.speedX;
-                p.rotation += p.rotationSpeed;
-
-                if (p.y > height) {
-                    p.y = -10;
-                    p.x = Math.random() * width;
-                }
-
-                ctx.save();
-                ctx.translate(p.x, p.y);
-                ctx.rotate((p.rotation * Math.PI) / 180);
-                ctx.beginPath();
-                ctx.ellipse(0, 0, p.radius * 1.5, p.radius, 0, 0, Math.PI * 2);
-                ctx.fillStyle = `${p.color} ${p.alpha})`;
-                ctx.fill();
-                ctx.restore();
-            });
-
-            requestAnimationFrame(animateParticles);
-        }
-        animateParticles();
-    });
-</script>
