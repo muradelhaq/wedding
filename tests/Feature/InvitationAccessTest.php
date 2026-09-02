@@ -22,7 +22,8 @@ class InvitationAccessTest extends TestCase
         $response = $this->get('/');
 
         $response->assertStatus(200);
-        $response->assertSee('Tasyakuran Pernikahan');
+        $response->assertSee('Akad Nikah');
+        $response->assertSee('Walimatul');
         $response->assertSee('Ramazan');
         $response->assertSee('Dede');
     }

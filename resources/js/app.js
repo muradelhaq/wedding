@@ -1,4 +1,5 @@
 import './bootstrap';
+import './translations';
 import Alpine from 'alpinejs';
 
 window.Alpine = Alpine;

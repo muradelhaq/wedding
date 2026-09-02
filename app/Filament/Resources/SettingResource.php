@@ -26,36 +26,39 @@ class SettingResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('key')
-                    ->label('Kunci Pengaturan')
-                    ->required()
-                    ->maxLength(100)
-                    ->disabled(fn (?Setting $record) => $record !== null),
+                Forms\Components\Section::make('Konfigurasi Konten')
+                    ->schema([
+                        Forms\Components\TextInput::make('key')
+                            ->label('Kunci Pengaturan')
+                            ->required()
+                            ->maxLength(100)
+                            ->disabled(fn (?Setting $record) => $record !== null),
 
-                Forms\Components\Select::make('group')
-                    ->label('Grup')
-                    ->options([
-                        'general' => 'Umum',
-                        'quotes' => 'Kutipan & Doa',
-                        'couple' => 'Profil Mempelai',
-                        'event' => 'Detail Acara',
-                        'envelope' => 'Amplop Digital',
-                    ])
-                    ->required(),
+                        Forms\Components\Select::make('group')
+                            ->label('Grup')
+                            ->options([
+                                'general' => 'Umum',
+                                'quotes' => 'Kutipan & Doa',
+                                'couple' => 'Profil Mempelai',
+                                'event' => 'Detail Acara',
+                                'envelope' => 'Amplop Digital',
+                            ])
+                            ->required(),
 
-                Forms\Components\Select::make('type')
-                    ->label('Tipe Form')
-                    ->options([
-                        'text' => 'Teks Pendek',
-                        'textarea' => 'Teks Panjang',
-                        'image' => 'URL Gambar',
-                    ])
-                    ->required(),
+                        Forms\Components\Select::make('type')
+                            ->label('Tipe Form')
+                            ->options([
+                                'text' => 'Teks Pendek',
+                                'textarea' => 'Teks Panjang',
+                                'image' => 'URL Gambar',
+                            ])
+                            ->required(),
 
-                Forms\Components\Textarea::make('value')
-                    ->label('Isi Nilai / Konten')
-                    ->rows(4)
-                    ->columnSpanFull(),
+                        Forms\Components\Textarea::make('value')
+                            ->label('Isi Nilai / Konten')
+                            ->rows(4)
+                            ->columnSpanFull(),
+                    ])->columns(['default' => 1, 'sm' => 2]),
             ]);
     }
 
@@ -64,26 +67,29 @@ class SettingResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('key')
-                    ->label('Kunci')
+                    ->label('Kunci Pengaturan')
                     ->searchable()
                     ->sortable()
                     ->fontFamily('mono')
-                    ->weight('bold'),
+                    ->weight('bold')
+                    ->description(fn (Setting $record): string => "Grup: {$record->group}"),
 
                 Tables\Columns\TextColumn::make('group')
                     ->label('Grup')
                     ->badge()
-                    ->sortable(),
+                    ->sortable()
+                    ->visibleFrom('md'),
 
                 Tables\Columns\TextColumn::make('value')
                     ->label('Nilai Konten')
-                    ->limit(60)
+                    ->limit(50)
                     ->searchable(),
 
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->label('Terakhir Diperbarui')
+                    ->label('Diperbarui')
                     ->dateTime('d M Y H:i')
-                    ->sortable(),
+                    ->sortable()
+                    ->visibleFrom('lg'),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('group')
@@ -97,7 +103,9 @@ class SettingResource extends Resource
                     ]),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->iconButton()
+                    ->tooltip('Edit'),
             ])
             ->bulkActions([]);
     }

@@ -31,8 +31,8 @@ class DatabaseSeeder extends Seeder
         // 3. Create Seed Guests
         $guests = [
             [
-                'name' => 'Keluarga Ağrı-Indo',
-                'slug' => 'keluarga-agri-indo',
+                'name' => 'Keluarga Istanbul-Indo',
+                'slug' => 'keluarga-istanbul-indo',
                 'category' => 'Keluarga Besar',
                 'phone' => '081234567890',
                 'address' => 'Turki & Indonesia',
@@ -49,7 +49,7 @@ class DatabaseSeeder extends Seeder
                 'slug' => 'ismail-akcaalan-t4m2',
                 'category' => 'Keluarga',
                 'phone' => '081345678901',
-                'address' => 'Ağrı, Turki',
+                'address' => 'Istanbul, Turki',
             ],
             [
                 'name' => 'Sahabat & Kerabat Tercinta',
@@ -74,7 +74,7 @@ class DatabaseSeeder extends Seeder
             );
 
             // Sample RSVP for the first guest
-            if ($guest->slug === 'keluarga-agri-indo') {
+            if ($guest->slug === 'keluarga-istanbul-indo') {
                 Rsvp::firstOrCreate(
                     ['guest_id' => $guest->id],
                     [

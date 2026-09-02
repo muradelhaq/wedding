@@ -9,14 +9,16 @@
 ### Mempelai Pria (Groom)
 - **Nama Lengkap:** Ramazan Akcaalan
 - **Nama Panggilan:** Ramazan
+- **Instagram:** [@Ramazanakcaalan._](https://instagram.com/Ramazanakcaalan._)
 - **Orang Tua:**
   - Ayah: Bpk. Ismail Akcaalan
   - Ibu: Ibu Aysel Akcaalan
-- **Asal / Keluarga:** Keluarga Ağrı (Turki)
+- **Asal / Keluarga:** Keluarga Istanbul (Turki)
 
 ### Mempelai Wanita (Bride)
 - **Nama Lengkap:** Dede Sobariah
 - **Nama Panggilan:** Dede
+- **Instagram:** [@Hayira_Bohs](https://instagram.com/Hayira_Bohs)
 - **Orang Tua:**
   - Ayah: Bpk. Endeng Zenal Arifin
   - Ibu: Ibu Ipah Saripah
@@ -26,11 +28,13 @@
 
 ## 2. Rincian Acara (Event Details)
 
-- **Nama Acara:** Tasyakuran Pernikahan
+- **Nama Acara:** Rangkaian Acara Pernikahan (Akad Nikah & Walimatul 'Urs)
 - **Hari / Tanggal:** Ahad, 20 September 2026
-- **Waktu:** 11.00 - 15.00 WIB
-- **Tempat / Lokasi:** Rumah Makan dan Wisata Eptilu, Garut
-- **Link Google Maps:** [https://bit.ly/4qGZHen](https://bit.ly/4qGZHen)
+- **Akad Nikah:** 10.00 - 11.00 WIB
+- **Walimatul 'Urs (Walimah):** 11.00 - 15.00 WIB
+- **Tempat / Lokasi:** Rumah Makan Leila, Garut
+- **Alamat:** Jl. Raya Garut – Cikajang No. 22, Mekarsari, Kec. Cikajang, Kabupaten Garut, Jawa Barat 44171
+- **Link Google Maps:** [https://share.google/yFV64kCwHfucu2xOl](https://share.google/yFV64kCwHfucu2xOl)
 
 ---
 
@@ -58,5 +62,5 @@
 ---
 
 ## 4. Grup / Kategori Tamu Terkait
-- **Target Grup Utama:** `Keluarga Ağrı-Indo`
+- **Target Grup Utama:** `Keluarga Istanbul-Indo`
 - **Kategori Tambahan:** `Keluarga Turki`, `Keluarga Indonesia`, `Kolega`, `Sahabat`

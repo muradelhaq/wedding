@@ -1,8 +1,8 @@
 {
   "general": {
-    "title": "Tasyakuran Pernikahan Ramazan & Dede",
-    "theme": "champagne-emerald",
-    "target_group": "Keluarga Ağrı-Indo"
+    "title": "The Wedding of Ramazan & Dede",
+    "theme": "sage-white",
+    "target_group": "Keluarga Istanbul-Indo"
   },
   "couple": {
     "groom": {
@@ -10,8 +10,8 @@
       "nickname": "Ramazan",
       "father": "Ismail Akcaalan",
       "mother": "Aysel Akcaalan",
-      "origin": "Ağrı, Turki",
-      "instagram": "ramazanakcaalan"
+      "origin": "Istanbul, Turki",
+      "instagram": "Ramazanakcaalan._"
     },
     "bride": {
       "name": "Dede Sobariah",
@@ -19,7 +19,7 @@
       "father": "Endeng Zenal Arifin",
       "mother": "Ipah Saripah",
       "origin": "Garut, Indonesia",
-      "instagram": "dedesobariah"
+      "instagram": "Hayira_Bohs"
     }
   },
   "event": {

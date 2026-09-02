@@ -26,32 +26,34 @@ class GalleryResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('title')
-                    ->label('Judul / Keterangan')
-                    ->maxLength(255),
+                Forms\Components\Section::make('Detail Galeri Media')
+                    ->schema([
+                        Forms\Components\TextInput::make('title')
+                            ->label('Judul / Keterangan')
+                            ->maxLength(255),
 
-                Forms\Components\TextInput::make('file_path')
-                    ->label('URL Foto / Media')
-                    ->required()
-                    ->url()
-                    ->maxLength(500),
+                        Forms\Components\TextInput::make('file_path')
+                            ->label('URL Foto / Media')
+                            ->required()
+                            ->maxLength(500),
 
-                Forms\Components\Select::make('media_type')
-                    ->label('Tipe Media')
-                    ->options([
-                        'image' => 'Foto (Gambar)',
-                        'video' => 'Video (URL)',
-                    ])
-                    ->default('image')
-                    ->required(),
+                        Forms\Components\Select::make('media_type')
+                            ->label('Tipe Media')
+                            ->options([
+                                'image' => 'Foto (Gambar)',
+                                'video' => 'Video (URL)',
+                            ])
+                            ->default('image')
+                            ->required(),
 
-                Forms\Components\TextInput::make('sort_order')
-                    ->label('Urutan')
-                    ->numeric()
-                    ->default(0),
+                        Forms\Components\TextInput::make('sort_order')
+                            ->label('Urutan Tampil')
+                            ->numeric()
+                            ->default(0),
 
-                Forms\Components\Toggle::make('is_featured')
-                    ->label('Tampilkan sebagai Foto Utama'),
+                        Forms\Components\Toggle::make('is_featured')
+                            ->label('Tampilkan sebagai Foto Utama Cover'),
+                    ])->columns(['default' => 1, 'sm' => 2]),
             ]);
     }
 
@@ -64,22 +66,28 @@ class GalleryResource extends Resource
                     ->square(),
 
                 Tables\Columns\TextColumn::make('title')
-                    ->label('Judul')
+                    ->label('Judul Media')
                     ->searchable()
-                    ->placeholder('-'),
+                    ->placeholder('-')
+                    ->description(fn (Gallery $record): string => "Urutan: {$record->sort_order}" . ($record->is_featured ? ' • Featured ⭐' : '')),
 
                 Tables\Columns\TextColumn::make('sort_order')
                     ->label('Urutan')
-                    ->sortable(),
+                    ->sortable()
+                    ->visibleFrom('md'),
 
                 Tables\Columns\IconColumn::make('is_featured')
                     ->label('Featured')
-                    ->boolean(),
+                    ->boolean()
+                    ->visibleFrom('sm'),
             ])
             ->defaultSort('sort_order', 'asc')
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\EditAction::make(),
+                    Tables\Actions\DeleteAction::make(),
+                ])
+                ->tooltip('Aksi'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

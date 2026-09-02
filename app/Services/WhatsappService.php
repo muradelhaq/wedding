@@ -32,7 +32,9 @@ class WhatsappService
         $bride = Setting::get('bride_nickname', 'Dede');
         $day = Setting::get('event_day', 'Ahad');
         $date = Setting::get('event_date_formatted', '20 September 2026');
-        $venue = Setting::get('event_venue', 'Rumah Makan dan Wisata Eptilu, Garut');
+        $akadTime = Setting::get('akad_time', '10.00 - 11.00 WIB');
+        $walimahTime = Setting::get('walimah_time', '11.00 - 15.00 WIB');
+        $venue = Setting::get('event_venue', 'Rumah Makan Leila, Garut');
         $url = $guest->personal_url;
 
         return <<<TEXT
@@ -41,12 +43,13 @@ class WhatsappService
 بسم اللّه الرّحمن الرّحيم 
 ٱلسَّلَامُ عَلَيْكُمْ وَرَحْمَةُ ٱللَّٰهِ وَبَرَكَاتُهُ
 
-Dengan memohon Rahmat & Ridho Allah Subhanahu Wata'ala, kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk menghadiri acara *Tasyakuran Pernikahan* kami:
+Dengan memohon Rahmat & Ridho Allah Subhanahu Wata'ala, kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk menghadiri acara Pernikahan kami:
 
 ✨ *{$groom} & {$bride}* ✨
 
 📅 *Hari/Tanggal:* {$day}, {$date}
-⏰ *Waktu:* 11.00 - 15.00 WIB
+💍 *Akad Nikah:* {$akadTime}
+🌸 *Walimatul 'Urs:* {$walimahTime}
 📍 *Tempat:* {$venue}
 
 Untuk informasi detail acara, lokasi, dan konfirmasi kehadiran (RSVP), silakan kunjungi link undangan personal Anda melalui tautan berikut:

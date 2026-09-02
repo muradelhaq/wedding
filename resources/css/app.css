@@ -220,3 +220,25 @@
 ::-webkit-scrollbar-thumb:hover {
     background: #6f9575;
 }
+
+/* Handmade Fine Paper / Linen Texture */
+.bg-wedding-paper {
+    background-color: #F4F7F4;
+    background-image: 
+        radial-gradient(rgba(111, 149, 117, 0.08) 1px, transparent 0),
+        radial-gradient(rgba(182, 205, 185, 0.05) 1px, transparent 0);
+    background-size: 24px 24px, 12px 12px;
+    background-position: 0 0, 12px 12px;
+}
+
+/* Subtle Botanical Watermark Pattern (Eucalyptus & Olive Leaves) */
+.bg-botanical-pattern {
+    background-image: url("data:image/svg+xml,%3Csvg width='140' height='140' viewBox='0 0 140 140' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%236F9575' fill-opacity='0.04'%3E%3Cpath d='M25 15 C45 5, 55 25, 40 40 C25 55, 15 35, 25 15 Z'/%3E%3Cpath d='M110 80 C125 70, 135 90, 120 105 C105 120, 95 100, 110 80 Z'/%3E%3Cpath d='M70 105 C60 95, 80 85, 85 100 C90 115, 75 120, 70 105 Z'/%3E%3Cpath d='M85 30 C75 20, 95 10, 100 25 C105 40, 90 45, 85 30 Z'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* Soft Decorative Card Arch Silhouette */
+.arch-card-glow {
+    position: relative;
+    box-shadow: 0 10px 35px -5px rgba(111, 149, 117, 0.12), 0 0 0 1px rgba(213, 226, 215, 0.6);
+}
+

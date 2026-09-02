@@ -9,6 +9,32 @@ use Illuminate\Http\Request;
 class GuestbookController extends Controller
 {
     /**
+     * Display a paginated list of guestbook messages (5 per page).
+     */
+    public function index(Request $request): JsonResponse
+    {
+        $perPage = 5;
+        $guestbooks = Guestbook::where('is_approved', true)
+            ->latest('id')
+            ->paginate($perPage);
+
+        return response()->json([
+            'current_page' => $guestbooks->currentPage(),
+            'last_page' => $guestbooks->lastPage(),
+            'total' => $guestbooks->total(),
+            'per_page' => $guestbooks->perPage(),
+            'data' => $guestbooks->getCollection()->map(function ($item) {
+                return [
+                    'id' => $item->id,
+                    'name' => e($item->name),
+                    'message' => e($item->message),
+                    'time_ago' => $item->created_at->diffForHumans(),
+                ];
+            })->values(),
+        ]);
+    }
+
+    /**
      * Store a new guestbook message.
      */
     public function store(Request $request): JsonResponse

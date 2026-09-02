@@ -26,31 +26,33 @@ class StoryResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('title')
-                    ->label('Judul Cerita')
-                    ->required()
-                    ->maxLength(255),
+                Forms\Components\Section::make('Detail Love Story')
+                    ->schema([
+                        Forms\Components\TextInput::make('title')
+                            ->label('Judul Cerita')
+                            ->required()
+                            ->maxLength(255),
 
-                Forms\Components\TextInput::make('date_label')
-                    ->label('Label Tanggal / Waktu')
-                    ->placeholder('Contoh: 2024 / Awal Mula')
-                    ->maxLength(255),
+                        Forms\Components\TextInput::make('date_label')
+                            ->label('Label Tanggal / Waktu')
+                            ->placeholder('Contoh: 2024 / Awal Mula')
+                            ->maxLength(255),
 
-                Forms\Components\TextInput::make('image_path')
-                    ->label('URL Foto Cerita')
-                    ->url()
-                    ->maxLength(500),
+                        Forms\Components\TextInput::make('image_path')
+                            ->label('URL Foto Cerita')
+                            ->maxLength(500),
 
-                Forms\Components\TextInput::make('sort_order')
-                    ->label('Urutan')
-                    ->numeric()
-                    ->default(0),
+                        Forms\Components\TextInput::make('sort_order')
+                            ->label('Urutan')
+                            ->numeric()
+                            ->default(0),
 
-                Forms\Components\Textarea::make('description')
-                    ->label('Isi Cerita')
-                    ->required()
-                    ->rows(4)
-                    ->columnSpanFull(),
+                        Forms\Components\Textarea::make('description')
+                            ->label('Isi Cerita')
+                            ->required()
+                            ->rows(4)
+                            ->columnSpanFull(),
+                    ])->columns(['default' => 1, 'sm' => 2]),
             ]);
     }
 
@@ -60,25 +62,32 @@ class StoryResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('sort_order')
                     ->label('#')
-                    ->sortable(),
+                    ->sortable()
+                    ->visibleFrom('md'),
 
                 Tables\Columns\TextColumn::make('title')
-                    ->label('Judul')
+                    ->label('Judul Cerita')
                     ->searchable()
-                    ->weight('bold'),
+                    ->weight('bold')
+                    ->description(fn (Story $record): ?string => $record->date_label ? "Periode: {$record->date_label}" : null),
 
                 Tables\Columns\TextColumn::make('date_label')
-                    ->label('Label Tanggal')
-                    ->badge(),
+                    ->label('Label Waktu')
+                    ->badge()
+                    ->visibleFrom('sm'),
 
                 Tables\Columns\TextColumn::make('description')
-                    ->label('Isi')
-                    ->limit(60),
+                    ->label('Isi Cerita')
+                    ->limit(50)
+                    ->visibleFrom('lg'),
             ])
             ->defaultSort('sort_order', 'asc')
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\EditAction::make(),
+                    Tables\Actions\DeleteAction::make(),
+                ])
+                ->tooltip('Aksi'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

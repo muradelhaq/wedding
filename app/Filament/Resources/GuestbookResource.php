@@ -26,25 +26,29 @@ class GuestbookResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('guest_id')
-                    ->relationship('guest', 'name')
-                    ->label('Tamu Terkait')
-                    ->searchable()
-                    ->nullable(),
+                Forms\Components\Section::make('Detail Ucapan & Doa')
+                    ->schema([
+                        Forms\Components\Select::make('guest_id')
+                            ->relationship('guest', 'name')
+                            ->label('Tamu Terkait')
+                            ->searchable()
+                            ->nullable(),
 
-                Forms\Components\TextInput::make('name')
-                    ->label('Nama Pengirim')
-                    ->required()
-                    ->maxLength(255),
+                        Forms\Components\TextInput::make('name')
+                            ->label('Nama Pengirim')
+                            ->required()
+                            ->maxLength(255),
 
-                Forms\Components\Textarea::make('message')
-                    ->label('Pesan / Doa Restu')
-                    ->required()
-                    ->columnSpanFull(),
+                        Forms\Components\Textarea::make('message')
+                            ->label('Pesan / Doa Restu')
+                            ->required()
+                            ->rows(4)
+                            ->columnSpanFull(),
 
-                Forms\Components\Toggle::make('is_approved')
-                    ->label('Status Tampil (Disetujui)')
-                    ->default(true),
+                        Forms\Components\Toggle::make('is_approved')
+                            ->label('Status Tampil (Disetujui)')
+                            ->default(true),
+                    ])->columns(['default' => 1, 'sm' => 2]),
             ]);
     }
 
@@ -53,33 +57,40 @@ class GuestbookResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->label('Nama Pengirim')
+                    ->label('Pengirim')
                     ->searchable()
                     ->sortable()
-                    ->weight('bold'),
+                    ->weight('bold')
+                    ->description(fn (Guestbook $record): ?string => 
+                        $record->guest ? 'Tamu: ' . $record->guest->name : ($record->created_at?->diffForHumans() ?? null)
+                    ),
 
                 Tables\Columns\TextColumn::make('message')
                     ->label('Ucapan / Doa')
                     ->searchable()
                     ->wrap()
-                    ->limit(100),
+                    ->limit(80),
 
                 Tables\Columns\ToggleColumn::make('is_approved')
-                    ->label('Tampilkan')
+                    ->label('Tampil')
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Waktu Dikirim')
                     ->dateTime('d M Y H:i')
-                    ->sortable(),
+                    ->sortable()
+                    ->visibleFrom('md'),
             ])
             ->filters([
                 Tables\Filters\TernaryFilter::make('is_approved')
                     ->label('Status Moderasi'),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\EditAction::make(),
+                    Tables\Actions\DeleteAction::make(),
+                ])
+                ->tooltip('Aksi'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

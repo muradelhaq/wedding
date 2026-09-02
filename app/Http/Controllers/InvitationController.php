@@ -54,7 +54,7 @@ class InvitationController extends Controller
         $settings = Setting::getAllGrouped();
         $stories = Story::orderBy('sort_order', 'asc')->get();
         $galleries = Gallery::orderBy('sort_order', 'asc')->get();
-        $guestbooks = Guestbook::where('is_approved', true)->latest()->take(50)->get();
+        $guestbooks = Guestbook::where('is_approved', true)->latest('id')->paginate(5);
 
         return view('invitation.index', compact('guest', 'settings', 'stories', 'galleries', 'guestbooks'));
     }

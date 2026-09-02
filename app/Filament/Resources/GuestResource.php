@@ -48,14 +48,14 @@ class GuestResource extends Resource
                             ->required()
                             ->unique(ignoreRecord: true)
                             ->maxLength(100)
-                            ->helperText('Akan digunakan untuk URL: domain.com/{slug}'),
+                            ->helperText('URL: domain.com/{slug}'),
 
                         Forms\Components\TextInput::make('category')
                             ->label('Kategori Tamu')
                             ->default('Umum')
                             ->maxLength(100)
                             ->datalist([
-                                'Keluarga Ağrı-Indo',
+                                'Keluarga Istanbul-Indo',
                                 'Keluarga',
                                 'Sahabat',
                                 'Kolega',
@@ -78,7 +78,7 @@ class GuestResource extends Resource
                             ->label('Status Undangan Telah Dibuka')
                             ->disabled()
                             ->dehydrated(false),
-                    ])->columns(2),
+                    ])->columns(['default' => 1, 'sm' => 2]),
             ]);
     }
 
@@ -90,14 +90,20 @@ class GuestResource extends Resource
                     ->label('Nama Tamu')
                     ->searchable()
                     ->sortable()
-                    ->weight('bold'),
+                    ->weight('bold')
+                    ->description(fn (Guest $record): string => 
+                        ($record->category ?? 'Umum') . 
+                        ($record->phone ? ' • ' . $record->phone : '') . 
+                        ($record->is_opened ? ' • 👁️ Dibuka' : ' • ✉️ Belum Buka')
+                    ),
 
                 Tables\Columns\TextColumn::make('category')
                     ->label('Kategori')
                     ->badge()
                     ->color('info')
                     ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->visibleFrom('md'),
 
                 Tables\Columns\TextColumn::make('slug')
                     ->label('Slug Link')
@@ -105,12 +111,14 @@ class GuestResource extends Resource
                     ->copyable()
                     ->copyMessage('Link slug berhasil disalin!')
                     ->fontFamily('mono')
-                    ->color('gray'),
+                    ->color('gray')
+                    ->visibleFrom('lg'),
 
                 Tables\Columns\TextColumn::make('phone')
                     ->label('No. WhatsApp')
                     ->searchable()
-                    ->placeholder('-'),
+                    ->placeholder('-')
+                    ->visibleFrom('md'),
 
                 Tables\Columns\IconColumn::make('is_opened')
                     ->label('Dibuka')
@@ -119,7 +127,8 @@ class GuestResource extends Resource
                     ->falseIcon('heroicon-o-x-circle')
                     ->trueColor('success')
                     ->falseColor('gray')
-                    ->sortable(),
+                    ->sortable()
+                    ->visibleFrom('sm'),
 
                 Tables\Columns\TextColumn::make('rsvp.attendance')
                     ->label('Status RSVP')
@@ -133,7 +142,7 @@ class GuestResource extends Resource
                     ->formatStateUsing(fn (?string $state): string => match ($state) {
                         'hadir' => 'Hadir',
                         'tidak_hadir' => 'Tidak Hadir',
-                        'ragu' => 'Ragu-ragu',
+                        'ragu' => 'Ragu',
                         default => 'Belum RSVP',
                     }),
 
@@ -153,7 +162,7 @@ class GuestResource extends Resource
                 Tables\Filters\SelectFilter::make('category')
                     ->label('Filter Kategori')
                     ->options([
-                        'Keluarga Ağrı-Indo' => 'Keluarga Ağrı-Indo',
+                        'Keluarga Istanbul-Indo' => 'Keluarga Istanbul-Indo',
                         'Keluarga' => 'Keluarga',
                         'Sahabat' => 'Sahabat',
                         'Kolega' => 'Kolega',
@@ -166,21 +175,26 @@ class GuestResource extends Resource
             ])
             ->actions([
                 Tables\Actions\Action::make('send_wa')
-                    ->label('Kirim WA')
+                    ->iconButton()
                     ->icon('heroicon-o-paper-airplane')
+                    ->tooltip('Kirim Undangan via WhatsApp')
                     ->color('success')
                     ->url(fn (Guest $record): string => app(WhatsappService::class)->generateShareUrl($record))
                     ->openUrlInNewTab(),
 
                 Tables\Actions\Action::make('preview_invitation')
-                    ->label('Buka')
+                    ->iconButton()
                     ->icon('heroicon-o-arrow-top-right-on-square')
+                    ->tooltip('Buka Undangan Web')
                     ->color('primary')
                     ->url(fn (Guest $record): string => url('/' . $record->slug))
                     ->openUrlInNewTab(),
 
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\EditAction::make(),
+                    Tables\Actions\DeleteAction::make(),
+                ])
+                ->tooltip('Aksi Lainnya'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

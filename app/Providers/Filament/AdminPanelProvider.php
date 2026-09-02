@@ -30,6 +30,8 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login()
             ->brandName('Wedding Admin Panel')
+            ->sidebarCollapsibleOnDesktop()
+            ->maxContentWidth('full')
             ->colors([
                 'primary' => Color::Amber,
                 'gray' => Color::Zinc,
@@ -64,6 +66,69 @@ class AdminPanelProvider extends PanelProvider
                             }
                         }
                     </script>
+                ')
+            )
+            ->renderHook(
+                PanelsRenderHook::HEAD_END,
+                fn (): HtmlString => new HtmlString('
+                    <style>
+                        /* Frontend Professional Mobile Optimization for Filament Admin */
+                        @media (max-width: 768px) {
+                            /* Smooth touch scrolling with momentum */
+                            .fi-ta-content, .fi-ta-table-container {
+                                -webkit-overflow-scrolling: touch !important;
+                                scroll-behavior: smooth !important;
+                            }
+                            
+                            /* Touch target ergonomics (minimum 40px) */
+                            .fi-btn, .fi-icon-btn, .fi-ta-actions button, .fi-ta-actions a {
+                                min-height: 2.5rem;
+                                touch-action: manipulation;
+                            }
+                            
+                            .fi-icon-btn {
+                                min-width: 2.5rem;
+                                display: inline-flex;
+                                align-items: center;
+                                justify-content: center;
+                            }
+                            
+                            /* Compact, high-readability stats on phone screens */
+                            .fi-wi-stats-overview-stat {
+                                padding: 0.75rem 1rem !important;
+                                border-radius: 0.875rem !important;
+                            }
+                            
+                            .fi-wi-stats-overview-stat-value {
+                                font-size: 1.375rem !important;
+                                line-height: 1.75rem !important;
+                                font-weight: 800 !important;
+                            }
+                            
+                            /* Form fields & action spacing on small devices */
+                            .fi-fo-field-wrp {
+                                margin-bottom: 0.875rem;
+                            }
+                            
+                            /* Modal improvements for mobile viewports */
+                            .fi-modal-window {
+                                margin: 0.5rem !important;
+                                max-height: calc(100dvh - 1rem) !important;
+                                border-radius: 1.25rem !important;
+                            }
+
+                            /* Table cell padding optimization for high density on mobile */
+                            .fi-ta-cell {
+                                padding-top: 0.625rem !important;
+                                padding-bottom: 0.625rem !important;
+                            }
+
+                            /* Bottom safe-area padding for iPhone Home Indicator & Android gesture bar */
+                            body {
+                                padding-bottom: env(safe-area-inset-bottom, 0px);
+                            }
+                        }
+                    </style>
                 ')
             )
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')

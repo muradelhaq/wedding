@@ -1,16 +1,16 @@
 @props(['settings'])
 
 @php
-    $mapsEmbed = $settings['event']['event_maps_embed'] ?? 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.1706606041695!2d107.7854611!3d-7.3347101!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68ba9b8c66e2c3%3A0xe54ef90eaee60107!2sWisata%20Eptilu!5e0!3m2!1sen!2sid!4v1700000000000!5m2!1sen!2sid';
-    $mapsUrl = $settings['event']['event_maps_url'] ?? 'https://bit.ly/4qGZHen';
-    $venue = $settings['event']['event_venue'] ?? 'Rumah Makan dan Wisata Eptilu, Garut';
-    $address = $settings['event']['event_address'] ?? 'Jl. Raya Garut - Cikajang No.KM. 24, Mekarsari, Kec. Cikajang, Kabupaten Garut, Jawa Barat 44171';
+    $mapsEmbed = $settings['event']['event_maps_embed'] ?? 'https://www.google.com/maps?q=Rumah+Makan+Leila+Cikajang+Garut&output=embed';
+    $mapsUrl = $settings['event']['event_maps_url'] ?? 'https://share.google/yFV64kCwHfucu2xOl';
+    $venue = $settings['event']['event_venue'] ?? 'Rumah Makan Leila';
+    $address = $settings['event']['event_address'] ?? 'Jl. Raya Garut – Cikajang No. 22, Mekarsari, Kec. Cikajang, Kabupaten Garut, Jawa Barat 44171';
 @endphp
 
 <section class="py-16 px-6 max-w-4xl mx-auto">
     <div class="text-center mb-10" data-reveal="fade-down">
-        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-[#233327] mb-3">Peta Lokasi</h2>
-        <p class="text-xs uppercase tracking-widest text-[#57795c] font-semibold">Location & Directions</p>
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-[#233327] mb-3" x-text="t('maps_title')">Peta Lokasi</h2>
+        <p class="text-xs uppercase tracking-widest text-[#57795c] font-semibold" x-text="t('maps_subtitle')">Location & Directions</p>
         <div class="w-16 h-1 bg-[#6F9575] mx-auto rounded-full mt-3"></div>
     </div>
 
@@ -36,11 +36,11 @@
             </div>
 
             <a href="{{ $mapsUrl }}" target="_blank" rel="noopener noreferrer"
-               class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-[#6F9575] via-[#85AB8B] to-[#57795C] hover:from-[#57795C] hover:to-[#425E47] text-white text-xs font-semibold shadow-md transition duration-200 shrink-0">
+               class="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-gradient-to-r from-[#6F9575] via-[#85AB8B] to-[#57795C] hover:from-[#57795C] hover:to-[#425E47] text-white text-xs sm:text-sm font-semibold shadow-md transition duration-200 shrink-0">
                 <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
                 </svg>
-                <span>Petunjuk Arah (Google Maps)</span>
+                <span x-text="t('maps_dir_btn')">Petunjuk Arah (Google Maps)</span>
             </a>
         </div>
     </div>
